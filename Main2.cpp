@@ -128,20 +128,20 @@ class MarsModule
     // Update the five highest temperatures
     void updateFiveHighest()
     {
-        auto it = all_readings.end();
-        for(int i = 0; i < 5 && it != all_readings.begin(); ) {
-            --it; 
-            fiveHighestTemp[i] = *it;
+        auto j = all_readings.end();
+        for(int i = 0; i < 5 && j != all_readings.begin(); ) {
+            --j; 
+            fiveHighestTemp[i] = *j;
             ++i; 
         }
     }
     // Update the five lowest temperatures
     void updateFiveLowest()
     {
-        auto it = all_readings.begin();
-        for(int i = 0; i < 5 && it != all_readings.end(); ++i, ++it) 
+        auto j = all_readings.begin();
+        for(int i = 0; i < 5 && j != all_readings.end(); ++i, ++j) 
         {
-            fiveLowestTemp[i] = *it;
+            fiveLowestTemp[i] = *j;
         }
     }
 };

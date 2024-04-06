@@ -29,4 +29,28 @@ Within the output is the given runtime of the program which starts the internal 
 The average runtime of the program with a computer hardware of an overclocked 4 core 8 thread cpu to 4.5 GHZ is 20 Seconds.
 
 ## Part 2:
- This part requires that 8 threads read at regular intervals and compile the temperature data into highest temps, lowest
+This part requires that 8 threads read at regular intervals and compile the temperature data into highest temps, lowest temps and readings taken every minute.
+
+### How to Run:
+Run by compiling `g++ Main2.cpp` and run by `./a.exe`
+
+```
+Minites: 10: Highest Temp = 66, Lowest Temp = -100
+Minites: 11: Highest Temp = 69, Lowest Temp = -100
+Minites: 13: Highest Temp = 70, Lowest Temp = -100
+Minites: 14: Highest Temp = 70, Lowest Temp = -100
+Minites: 15: Highest Temp = 61, Lowest Temp = -100
+Finished in 0.0397665Seconds
+Highest Temperatures:
+---------------------
+|70 |69 |68 |66 |65 |
+---------------------
+
+Lowest Temperatures:
+---------------------------
+|-100 |-99 |-98 |-97 |-96 |
+---------------------------
+```
+Possible Expected Ouput
+
+### 
