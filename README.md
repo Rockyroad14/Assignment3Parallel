@@ -29,4 +29,4 @@ Within the output is the given runtime of the program which starts the internal 
 The average runtime of the program with a computer hardware of an overclocked 4 core 8 thread cpu to 4.5 GHZ is 20 Seconds.
 
 ## Part 2:
-
+ This part requires that 8 threads read at regular intervals and compile the temperature data into highest temps, lowest

@@ -61,7 +61,7 @@ class MarsModule
     // Print the hourly report
     void printHourReport(int interval, vector<int>& interval_max, vector<int>& interval_min)
     {
-        cout << "Hour " << interval + 1 << ": Highest Temp = " << interval_max[interval]
+        cout << "Minites: " << interval + 10 << ": Highest Temp = " << interval_max[interval]
              << ", Lowest Temp = " << interval_min[interval] << endl;
     }
 
