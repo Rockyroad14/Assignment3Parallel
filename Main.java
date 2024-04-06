@@ -6,10 +6,7 @@ import java.util.concurrent.locks.ReentrantLock;
 import java.util.Random;
 import java.util.HashSet;
 import java.util.concurrent.atomic.AtomicBoolean;
-import java.util.concurrent.locks.ReentrantLock;
 import java.util.concurrent.atomic.AtomicInteger;
-import java.io.PrintWriter;
-import java.io.File;
 import java.io.FileNotFoundException;
 
 public class Main 
@@ -45,6 +42,7 @@ public class Main
         {
 
             int start = i * sectionSize;
+            
             int end = (i + 1) * sectionSize - 1;
 
             if (i == THREADS - 1) 
@@ -53,7 +51,7 @@ public class Main
             }
 
             // Every iteration of the loop creates a new thread with new Servant object
-            Servant servant = new Servant(sharedList, start, end, insertCounter, deleteCounter, "output" + i + ".txt");
+            Servant servant = new Servant(sharedList, start, end, insertCounter, deleteCounter);
 
             threads[i] = new Thread(servant::runServant);
 
@@ -138,13 +136,10 @@ class Servant
     private final AtomicBoolean allRemoved = new AtomicBoolean(false);
     private static AtomicInteger totalInserts = new AtomicInteger(0);
     private static AtomicInteger totalDeletes = new AtomicInteger(0);
-    private PrintWriter fileWriter;
 
 
-    public Servant(LinkedList<Integer> giftChain, int start, int end, AtomicInteger totalInserts, AtomicInteger totalDeletes, String outputFileName) throws FileNotFoundException 
+    public Servant(LinkedList<Integer> giftChain, int start, int end, AtomicInteger totalInserts, AtomicInteger totalDeletes) throws FileNotFoundException 
     {
-        
-        this.fileWriter = new PrintWriter(new File(outputFileName));
         this.startBatch = start;
         this.endBatch = end;
         this.giftChain = giftChain;
@@ -194,10 +189,6 @@ class Servant
 
         allRemoved.set(true);
 
-        if (fileWriter != null) 
-        {
-            fileWriter.close();
-        }
     }
 
     boolean doOperation(int operation, int value, HashSet<Integer> addedGifts, HashSet<Integer> removedGifts)
@@ -208,7 +199,6 @@ class Servant
             // Add
             if (addedGifts.add(value)) {
                 giftChain.add(value);
-                fileWriter.println(value + " Added");
                 totalInserts.incrementAndGet();
                 result = true;
             }
@@ -219,7 +209,6 @@ class Servant
             if (addedGifts.contains(value) && giftChain.remove(value)) 
             {
                 removedGifts.add(value);
-                fileWriter.println(value);
                 totalDeletes.incrementAndGet();
                 result = true;
             }
@@ -229,8 +218,11 @@ class Servant
             // Search for gifts
             if (giftChain.contains(value)) 
             {
-                fileWriter.println("List contains: " + value);
                 result = true;
+            }
+            else
+            {
+                result = false;
             }
         }
         else 
@@ -263,7 +255,7 @@ class Node<T>
        this.key = (item != null) ? item.hashCode() : 0; // Use 0 or another value for null items
     }
     
-    
+
     void lock() 
     {
        lock.lock();
