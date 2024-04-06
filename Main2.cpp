@@ -20,8 +20,6 @@ void generateTemperature(int& reading);
 int getRandomValue();
 
 
-
-
 class MarsModule 
 {
     private:
@@ -93,10 +91,13 @@ class MarsModule
         for(int minute = 0; minute < 60; ++minute) 
         {
 
+            // Create 8 threads to simulate the 8 temperature readings
             vector<thread> threads(8);
 
+            // Start the threads
             startThreads(threads);
 
+            // Join the threads
             joinThreads(threads);
 
 
@@ -106,6 +107,7 @@ class MarsModule
                 all_readings.insert(readings[i]); 
             }
 
+            // Update the highest and lowest temperatures for the hour
             hourMax[interval] = max(hourMax[interval], *max_element(readings, readings + 8));
             hourMin[interval] = min(hourMin[interval], *min_element(readings, readings + 8));
 
