@@ -53,4 +53,19 @@ Lowest Temperatures:
 ```
 Possible Expected Ouput
 
-### 
+### Implementation and Proof of correctness:
+* Report Generation: The program generates a report at the end of every hour, as specified in the prompt. The report includes the top 5 highest temperatures, top 5 lowest temperatures, and the 10-minute interval with the largest temperature difference.
+* Temperature Readings: The program simulates temperature readings every minute using 8 temperature sensors. The readings are stored accurately in shared memory space.
+* Temperature Calculation: The program correctly calculates the highest and lowest temperatures for each hour and identifies the interval with the largest temperature difference.
+* Locks Safety: Mutexes are used to ensure thread safety when accessing shared resources, preventing race conditions and data corruption.
+* Data Integrity: The program maintains the integrity of temperature readings by properly synchronizing access to shared memory using mutexes.
+* Progress Guarantee: The program simulates temperature readings for 60 minutes, generating a report at the end of each hour, demonstrating progress guarantee.
+
+### Efficiency of Design:
+
+Since all threads are grabing a sinmple output in parallel and only calling one function that reads and does not write output the threads encounter almost no collisions and contentions. There is a shared memory space with mutexes.
+
+### Experimental Evaluation:
+
+The experimental evaluation of this program ran the program in a average time of `0.03 seconds`
+
